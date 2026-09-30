@@ -1,0 +1,12 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { PageHero } from "@/components/page-hero";
+import { SiteShell } from "@/components/site-shell";
+
+const groups = [
+  { name: "Manicures", items: [["Classic manicure", "Shape, cuticle care and colour", "$28"], ["Gel manicure", "High-shine, long-wear gel colour", "$45"], ["Veloura signature", "Gel, treatment and hand ritual", "$65"]] },
+  { name: "Pedicures", items: [["Essential pedicure", "Fresh shape, care and colour", "$42"], ["Deluxe pedicure", "Exfoliation, massage and gel", "$68"], ["Spa ritual", "Complete restorative foot care", "$85"]] },
+  { name: "Art & extensions", items: [["French details", "Classic or colourful tips", "+$12"], ["Nail art", "Hand-painted details per set", "+$20"], ["Soft gel extensions", "Lightweight, sculpted length", "$90"]] },
+];
+export const Route = createFileRoute("/services")({ head: () => ({ meta: [{title:"Services & Prices — Veloura"},{name:"description",content:"Explore Veloura manicure, pedicure, nail art and extension services."},{property:"og:title",content:"Services & Prices — Veloura"},{property:"og:description",content:"Find your perfect Veloura nail service."},{property:"og:type",content:"website"},{name:"twitter:card",content:"summary_large_image"}] }), component: Services });
+function Services(){return <SiteShell><PageHero eyebrow="Services & pricing" title="A finish for every mood.">Simple pricing, meticulous care, and options that go from beautifully minimal to entirely your own.</PageHero><main className="mx-auto max-w-7xl px-5 py-16 lg:px-8">{groups.map((group)=><section key={group.name} className="grid gap-5 border-b border-border py-10 md:grid-cols-[0.6fr_1.4fr]"><h2 className="font-display text-5xl">{group.name}</h2><div>{group.items.map(([name,desc,price])=><div key={name} className="grid grid-cols-[1fr_auto] gap-5 border-t border-border py-5 first:border-0"><div><h3 className="font-sans text-lg font-bold">{name}</h3><p className="mt-1 text-sm text-muted-foreground">{desc}</p></div><span className="font-display text-2xl text-primary">{price}</span></div>)}</div></section>)}<div className="py-12 text-center"><Button asChild variant="salon" size="lg"><Link to="/signup">Book an appointment</Link></Button></div></main></SiteShell>}
